@@ -14,6 +14,10 @@ import Leaderboard from "@/pages/Leaderboard";
 import ChallengeDetails from "@/pages/ChallengeDetails";
 import NotFound from "@/pages/not-found";
 import { useNotifications } from "@/hooks/use-notifications";
+import { useFarcasterContext } from "@/hooks/use-farcaster-context";
+import { MiniAppReady } from "@/components/MiniAppReady";
+import { useEffect, useState } from "react";
+import { sdk } from "@farcaster/miniapp-sdk";
 
 function Router() {
   return (
@@ -29,24 +33,46 @@ function Router() {
   );
 }
 
-import { MiniAppReady } from "@/components/MiniAppReady";
-import { useEffect } from "react";
-import { sdk } from "@farcaster/miniapp-sdk";
-
 function App() {
+  const [isReady, setIsReady] = useState(false);
+  const { isLoading: isContextLoading, client } = useFarcasterContext();
   useNotifications();
 
   useEffect(() => {
-    sdk.actions.ready();
-  }, []);
+    // Wait for context to load, then signal app ready to hide splash screen
+    if (!isContextLoading) {
+      // Small delay to ensure UI is fully rendered
+      const timer = setTimeout(() => {
+        sdk.actions.ready().catch(console.error);
+        setIsReady(true);
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isContextLoading]);
+
+  // Calculate safe area insets for mobile
+  const safeAreaStyle = client?.safeAreaInsets ? {
+    paddingTop: `${client.safeAreaInsets.top}px`,
+    paddingBottom: `${client.safeAreaInsets.bottom}px`,
+    paddingLeft: `${client.safeAreaInsets.left}px`,
+    paddingRight: `${client.safeAreaInsets.right}px`,
+  } : {};
 
   return (
     <ThemeProvider>
       <TooltipProvider>
-        <div className="min-h-screen bg-background text-foreground font-sans selection:bg-secondary selection:text-secondary-foreground">
+        <div 
+          className="min-h-screen bg-background text-foreground font-sans selection:bg-secondary selection:text-secondary-foreground"
+          style={safeAreaStyle}
+        >
           <MiniAppReady />
-          <Router />
-          <Navigation />
+          {isReady && (
+            <>
+              <Router />
+              <Navigation />
+            </>
+          )}
           <Toaster />
         </div>
       </TooltipProvider>

@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import { useWallet } from "@/hooks/use-wallet";
 import { approveToken, createEscrowERC20, parseEscrowCreatedFromReceipt } from "@/lib/eth";
 import { useToast } from "@/hooks/use-toast";
+import { UserSearchInput } from "./UserSearchInput";
 
 // Extend the schema to ensure we coerce the amount and require a name
 const formSchema = insertChallengeSchema.extend({
@@ -158,10 +159,10 @@ export function CreateChallengeForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input 
-                      placeholder="@opponent" 
-                      {...field} 
-                      className="bg-muted border-border focus:border-secondary/50 rounded-lg text-xs h-9 px-3"
+                    <UserSearchInput 
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="@opponent"
                     />
                   </FormControl>
                   <FormMessage />

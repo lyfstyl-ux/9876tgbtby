@@ -807,7 +807,62 @@ async function seedDatabase() {
       noPool: 350
     });
   }
-}
 
-// Call seed in the background
-seedDatabase().catch(console.error);
+  // User search endpoint - search Farcaster users via Neynar
+  app.get(api.users.search.path, async (req, res) => {
+    try {
+      const { q } = req.query;
+      if (!q || typeof q !== 'string' || q.trim().length === 0) {
+        return res.status(400).json({ message: 'Search query required' });
+      }
+
+      const API_KEY = process.env.NEY_API_KEY;
+      if (!API_KEY) {
+        log('NEY_API_KEY not configured', 'search');
+        return res.status(500).json({ message: 'Neynar API key not configured' });
+      }
+
+      log(`Searching Neynar for: "${q}"`, 'search');
+
+      // Call Neynar v2 API to search users
+      const url = `https://api.neynar.com/v2/farcaster/user/search/?q=${encodeURIComponent(q)}&limit=10`;
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+        'x-api-key': API_KEY,
+      };
+
+      const neynarRes = await fetch(url, { headers });
+      if (!neynarRes.ok) {
+        const txt = await neynarRes.text();
+        log(`Neynar search error ${neynarRes.status}: ${txt}`, 'search');
+        return res.status(500).json({ message: 'Failed to search users' });
+      }
+
+      const body = await neynarRes.json();
+      log(`Full Neynar response for "${q}":`, 'search');
+      log(JSON.stringify(body, null, 2).substring(0, 500), 'search');
+      
+      const users = body.result?.users || [];
+      log(`Neynar returned ${users.length} results for query: "${q}"`, 'search');
+
+      // Transform response to match our schema
+      const transformed = users.map((user: any) => ({
+        username: user.username || '',
+        displayName: user.display_name || user.username,
+        pfp: user.pfp_url,
+        fid: user.fid,
+        followerCount: user.follower_count || 0,
+      })).filter((u: any) => u.username);
+
+      log(`Returning ${transformed.length} transformed users`, 'search');
+      res.json(transformed);
+    } catch (err) {
+      log(`User search error: ${String(err)}`, 'search');
+      res.status(500).json({ message: 'Failed to search users' });
+    }
+  });
+
+  // Seed database in the background
+  seedDatabase().catch(console.error);
+
+  return httpServer;

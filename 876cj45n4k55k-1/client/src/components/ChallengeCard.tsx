@@ -100,22 +100,16 @@ export function ChallengeCard({ challenge }: ChallengeCardProps) {
           <div className="flex justify-between items-start mb-2">
           <div>
             <div className="flex gap-2 mb-1">
-              <Badge 
-                variant="outline" 
-                className="bg-muted/50 border-secondary/20 text-secondary font-display uppercase tracking-wider"
-              >
-                {challenge.type === "p2p" ? "P2P Duel" : "Crowd Bet"}
-              </Badge>
               {settlementCoinName && (
                 <Badge 
                   variant="outline" 
-                  className="bg-amber-50 border-amber-200/50 text-amber-700 font-display uppercase tracking-wider"
+                  className="bg-amber-50 border-amber-200/50 text-amber-700 font-display uppercase tracking-wider text-xs"
                 >
                   Settles in ${settlementCoinName}
                 </Badge>
               )}
             </div>
-            <div className="font-display font-bold text-lg leading-tight">{challenge.name}</div>
+            <div className="font-display font-semibold text-sm leading-snug">{challenge.name}</div>
           </div>
 
           <div className="text-right">
@@ -129,25 +123,31 @@ export function ChallengeCard({ challenge }: ChallengeCardProps) {
         <div className="space-y-4">
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center space-x-2"> 
-              <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
-                {challenge.challenger.charAt(1).toUpperCase()}
+              <div className="relative">
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+                  {challenge.challenger.charAt(1).toUpperCase()}
+                </div>
+                <div className="absolute -top-1 -left-1 bg-secondary text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">C</div>
               </div>
               <span className="font-medium text-foreground">{challenge.challenger}</span>
             </div>
             <div className="text-muted-foreground font-display text-xs">VS</div>
             <div className="flex items-center space-x-2">
-              <span className="font-medium text-foreground">{challenge.opponent}</span>
-              <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">
-                {challenge.opponent.charAt(1).toUpperCase()}
+              <span className="font-medium text-foreground">{challenge.opponent || 'Open'}</span>
+              <div className="relative">
+                <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">
+                  {challenge.opponent ? challenge.opponent.charAt(1).toUpperCase() : '?'}
+                </div>
+                <div className="absolute -top-1 -right-1 bg-muted/80 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">O</div>
               </div>
             </div>
           </div>
 
           <div className="flex items-center justify-between pt-2 border-t border-border">
-            <div className="flex items-center text-xs text-muted-foreground">
-              {challenge.type === 'p2p' ? <Skull className="w-4 h-4 mr-1" /> : <Users className="w-4 h-4 mr-1" />}
-              <span>{challenge.status}</span>
-            </div>
+              <div className="flex items-center text-xs text-muted-foreground">
+                {challenge.type === 'p2p' ? <Skull className="w-4 h-4 mr-1" /> : <Users className="w-4 h-4 mr-1" />}
+                <span>{challenge.source ? challenge.source.toUpperCase() : 'WEB'}</span>
+              </div>
 
             <div className="flex items-center gap-3">
               {challenge.status === 'active' && challenge.opponent ? (

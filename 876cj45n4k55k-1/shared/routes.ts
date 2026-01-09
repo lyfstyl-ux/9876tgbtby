@@ -208,6 +208,25 @@ export const api = {
       },
     },
   },
+  users: {
+    search: {
+      method: 'GET' as const,
+      path: '/api/users/search',
+      input: z.object({
+        q: z.string().min(1),
+      }),
+      responses: {
+        200: z.array(z.object({
+          username: z.string(),
+          displayName: z.string().optional(),
+          pfp: z.string().optional(),
+          fid: z.number().optional(),
+          followerCount: z.number().optional(),
+        })),
+        400: errorSchemas.validation,
+      },
+    },
+  },
 };
 
 export function buildUrl(path: string, params?: Record<string, string | number>): string {
