@@ -1,0 +1,29 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOi0xLCJ0eXBlIjoiYXV0aCIsImtleSI6IjB4NjEwNEE4YzFCNzU4MUFmNURhMGI3MTYyZjgyMjFEMjgxNUJFMDI1YiJ9",
+    "payload": "eyJkb21haW4iOiJhZmQwMDNlZi0yYTc5LTQzN2MtOTc5NS04MDk4YmYxYmZmZTAtMDAtMnoycHN1cjZtaWgxcS5raXJrLnJlcGxpdC5kZXYifQ",
+    "signature": "MHgxMGQwZGU4ZGYwZDUwZTdmMGIxN2YxMTU2NDI1MjRmZTY0MTUyZGU4ZGU1MWU0MThiYjU4ZjVmZmQxYjRjNDBiNGVlZTRhNDcwNmVmNjhlMzQ0ZGQ5MDBkYmQyMmNlMmVlZGY5ZGQ0N2JlNWRmNzMwYzUxNjE4OWVjZDJjY2Y0MDFj"
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "Bantabro",
+    "homeUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/",
+    "iconUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/icon.png",
+    "splashImageUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/splash.png",
+    "splashBackgroundColor": "#000000",
+    "subtitle": "Social Betting",
+    "description": "Start and join challenges with friends.",
+    "screenshotUrls": [
+      "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/splash.png"
+    ],
+    "primaryCategory": "social",
+    "tags": ["social", "betting"],
+    "heroImageUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/splash.png",
+    "imageUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/splash.png",
+    "tagline": "Challenge anyone",
+    "ogTitle": "Bantabro Mini App",
+    "ogDescription": "Social betting and challenges on Base.",
+    "ogImageUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/splash.png",
+    "noindex": true
+  }
+}

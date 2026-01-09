@@ -1,0 +1,17 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOiA3Nzc3LCAidHlwZSI6ICJjdXN0b2RpYWwiLCAia2V5IjogIjB4MDAwIn0",
+    "payload": "eyJkb21haW4iOiAiYWZkMDAzZWYtMmE3OS00MzdjLTk3OTUtODA5OGJmMWJmZmUwLTAwLTJ6MnBzdXI2bWloMXEuay5yZXBsaXQuZGV2In0",
+    "signature": "MHgwMDA"
+  },
+  "frame": {
+    "version": "1",
+    "name": "Bantabro",
+    "iconUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/icon.png",
+    "homeUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/",
+    "imageUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/splash.png",
+    "buttonTitle": "Play Bantabro",
+    "splashImageUrl": "https://afd003ef-2a79-437c-9795-8098bf1bffe0-00-2z2psur6mih1q.kirk.replit.dev/splash.png",
+    "splashBackgroundColor": "#000000"
+  }
+}

@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* LIGHT MODE (Default) */
+  --background: 0 0% 100%;
+  --foreground: 224 71% 4%;
+  
+  --card: 0 0% 98%;
+  --card-foreground: 224 71% 4%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 71% 4%;
+  
+  --primary: 263 90% 61%;
+  --primary-foreground: 210 40% 98%;
+  
+  --secondary: 172 66% 50%;
+  --secondary-foreground: 224 71% 4%;
+  
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  
+  --accent: 326 100% 60%;
+  --accent-foreground: 210 40% 98%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 263 90% 61%;
+
+  --font-display: 'Oxanium', display;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+
+.dark {
+  /* DARK MODE */
+  --background: 224 71% 4%;
+  --foreground: 210 40% 98%;
+  
+  --card: 224 71% 6%;
+  --card-foreground: 210 40% 98%;
+  
+  --popover: 224 71% 6%;
+  --popover-foreground: 210 40% 98%;
+  
+  --primary: 263 90% 61%;
+  --primary-foreground: 210 40% 98%;
+  
+  --secondary: 172 66% 50%;
+  --secondary-foreground: 224 71% 4%;
+  
+  --muted: 215 28% 17%;
+  --muted-foreground: 215 20% 65%;
+  
+  --accent: 326 100% 60%;
+  --accent-foreground: 210 40% 98%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 215 28% 17%;
+  --input: 215 28% 17%;
+  --ring: 263 90% 61%;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-secondary selection:text-secondary-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply text-primary;
+  }
+  
+  .border-gradient {
+    @apply border border-border;
+  }
+  
+  .neon-shadow {
+    box-shadow: 0 0 10px rgba(79, 209, 197, 0.3), 0 0 20px rgba(124, 58, 237, 0.2);
+  }
+  
+  .glass-panel {
+    @apply bg-card/60 backdrop-blur-md border border-white/5 shadow-xl;
+  }
+}
